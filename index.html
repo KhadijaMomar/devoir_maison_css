@@ -23,14 +23,14 @@
 		</header>
 
 		<nav>
-			<ul>
+			<ul id="menuPrincipal">
 				<li><a href="/jsp/en_savoir_plus_mon_tableau_de_bord.jsp">Mon tableau de bord</a>
 					<ul>
 						<li><a href="jsp/mes_liaisons.jsp">&gt; Mes liaisons de comptes</a></li>
 						<li><a href="jsp/mon_calendrier.jsp">&gt; Mon calendrier</a></li>
 						<li><a href="jsp/mon_suivi.jsp">&gt; Mon suivi</a></li>
 					</ul> 
-					<span></span>
+					<span class="flecheActive"></span>
 				</li>
 				<li><a href="/jsp/en_savoir_plus_mes_documents.jsp">Mes documents</a>
 					<ul>
@@ -56,7 +56,7 @@
 				</li>
 			</ul>
 		</nav>
-		
+		<div id="sousMenu"></div>
 		<ul>
 			<li><a href="https://mon.service-public.fr/portail/">Accueil</a></li>
 			<li>&nbsp;&gt;&nbsp;Mon tableau de bord</li>
@@ -158,5 +158,25 @@
 			</div>
 		</footer>
 	</div>
+
+
+	<script>
+	// Sélectionne tous les <li> qui contiennent un sous-menu
+	document.querySelectorAll("nav > ul > li").forEach(li => {
+		li.addEventListener("click", function(e) {
+		// Empêche le clic sur le lien d'ouvrir la page
+		e.preventDefault();
+		e.stopPropagation();
+		// Ferme les autres menus
+		document.querySelectorAll("nav li.active").forEach(activeLi => {
+			if (activeLi !== li) activeLi.classList.remove("active");
+		});
+
+		// Bascule le menu cliqué
+		li.classList.toggle("active");
+		});
+	});
+    
+	</script>
 </body>
 </html>
